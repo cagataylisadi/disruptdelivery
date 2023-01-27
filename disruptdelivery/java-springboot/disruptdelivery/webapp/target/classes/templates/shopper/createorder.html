@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DisruptDeliver</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.css"/>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+</head>
+<body>
+<div th:insert="~{navbar :: div}"></div>
+
+<div class="container p-5">
+   <div class="card mx-3 mt-n5 shadow-lg" style="border-radius: 10px; border-left:8px black solid; border-right: none; border-top:none; border-bottom:none">
+    <div class="card-body">
+      <h4 class="card-title mb-3 text-uppercase">Please fill all the gaps.</h4>
+      <form th:action="@{/offering}" th:object="${orderForm}" method="POST">
+        <div class="row">
+          <div class="col">
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{address_name1}" class="form-control">
+              <label for="floatingTextInput1">Senders Full Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{address_street_and_number1}" class="form-control">
+              <label for="floatingTextInput1">Senders Street No</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{address_zipcode1}" class="form-control">
+              <label for="floatingTextInput1">Senders Zipcode</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{address_city1}" class="form-control">
+              <label for="floatingTextInput1">Senders City</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{country1}" class="form-control">
+              <label for="floatingTextInput1">Senders Country</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{address_name2}" class="form-control">
+              <label for="floatingTextInput2">Receivers Full Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{address_street_and_number2}" class="form-control">
+              <label for="floatingTextInput2">Receivers Street No</label>
+             </div>
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{address_zipcode2}" class="form-control">
+              <label for="floatingTextInput2">Receivers Zipcode</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{address_city2}" class="form-control">
+              <label for="floatingTextInput2">Receivers City</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" th:field="*{country2}" class="form-control">
+              <label for="floatingTextInput2">Receivers Country</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+            <h4 class="card-title mb-3 text-uppercase">Choose a product:</h4>
+            <div class="row form-floating mb-3 mt-3">
+                <select th:field="*{productid}" class="form-select">
+                    <option th:each="product: ${products}"
+                    th:text="${product.model_name}"
+                    th:value="${product.productid}"
+                    ></option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-dark">Order</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

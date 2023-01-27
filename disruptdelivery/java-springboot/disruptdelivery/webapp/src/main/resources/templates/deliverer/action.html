@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DisruptDeliver</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.css"/>
+  <script src="/webjars/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="/webjars/jquery/jquery.min.js"></script>
+</head>
+<body>
+<div th:insert="~{navbar :: div}"></div>
+
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <br>
+      <h2>Delivery Information</h2>
+      <ul class="list-group" th:each="item:${deliverinfo}">
+        <li class="list-group-item"th:text="'Id: '+${item.key.deliveryid}"></li>
+        <li class="list-group-item"th:text="'StreetNo: '+${item.value.street_and_number}"></li>
+        <li class="list-group-item"th:text="'Zipcode: '+${item.value.zipcode}"></li>
+        <li class="list-group-item"th:text="'City: '+${item.value.city}"></li>
+        <li class="list-group-item"th:text="'Country: '+${item.value.country}"></li>
+        <li class="list-group-item"><a target="_blank" rel="noopener" class="btn btn-primary" th:href="@{https://www.google.com/maps/search/}+${item.value.street_and_number}+${item.value.zipcode}+${item.value.city}+${item.value.country}">Maps</a></li>
+      </ul>
+    </div>
+      <div class="col-sm-4">
+        <br>
+        <div class="col container mt-3 pt-5">
+          <div class="row">
+            <form th:action="@{/deliver/fail}" th:object="${offerF}" method="POST">
+              <input class="form-control" type="hidden" id="orderid1" th:field="${offerF.orderid}">
+              <button type="submit" class="rounded-4 btn btn-lg btn-outline-danger">Failed</button>
+            </form>
+          </div>
+          <br>
+          <br>
+          <div class="row">
+            <form th:action="@{/deliver/success}" th:object="${offerS}" method="POST">
+              <input class="form-control" type="hidden" id="orderid2" th:field="${offerS.orderid}">
+              <button type="submit" class="rounded-4 btn btn-lg btn-outline-success">Delivered</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+
+</body>
+</html>

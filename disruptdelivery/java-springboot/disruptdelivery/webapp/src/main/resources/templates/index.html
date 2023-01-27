@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DisruptDeliver</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.css"/>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+</head>
+<body>
+<div th:insert="~{navbar :: div}"></div>
+
+<div class="mt-3 pt-5">
+    <div class="col text-center">
+      <a href="/order" class="btn btn-outline-dark btn-lg">Order a Product</a>
+    </div>
+    <br>
+    <div class="col text-center">
+        <a href="/tracker" class="btn btn-outline-dark btn-lg">Track a Delivery</a>
+    </div>
+    <br>
+    <div class="text-center">
+        <a href="/deliver" class="btn btn-outline-dark btn-lg">Deliver a Product</a>
+    </div>
+    <br>
+</div>
+
+</body>
+</html>

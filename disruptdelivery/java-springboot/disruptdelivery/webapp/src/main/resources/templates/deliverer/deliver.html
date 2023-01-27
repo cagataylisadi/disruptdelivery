@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DisruptDeliver</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.css"/>
+  <script src="/webjars/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="/webjars/jquery/jquery.min.js"></script>
+</head>
+<body>
+<div th:insert="~{navbar :: div}"></div>
+
+<div class="table-responsive container">
+  <table id="deliverTable" class="table table-striped">
+    <thead>
+    <tr>
+      <th>Delivery Time</th>
+      <th>Id</th>
+      <th>Current Status</th>
+      <th>StreetNo</th>
+      <th>ZipCode</th>
+      <th>City</th>
+      <th>Country</th>
+      <th>Maps</th>
+    </tr>
+    <tbody>
+    <tr th:each="item: ${deliverinfo}">
+      <td th:text="${#temporals.format(item.key.expected_delivery_time, 'dd MMM yyyy')}"></td>
+      <td th:text="${item.key.deliveryid}"></td>
+      <td th:text="${item.key.status}"></td>
+      <td th:text="${item.value.street_and_number}"></td>
+      <td th:text="${item.value.zipcode}"></td>
+      <td th:text="${item.value.city}"></td>
+      <td th:text="${item.value.country}"></td>
+      <td><a target="_blank" rel="noopener" class="btn btn-primary" th:href="@{https://www.google.com/maps/search/}+${item.value.street_and_number}+${item.value.zipcode}+${item.value.city}+${item.value.country}">Open</td>
+    </tr>
+    </tbody>
+    </thead>
+  </table>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <br>
+      <h3>Choose and enter the DeliveryId of a package</h3>
+      <form th:action="@{/deliver/start}" th:object="${offer}" method="POST">
+        <input class="form-control" type="number" id="orderid" th:field="*{orderid}">
+        <br>
+        <button type="submit" class="btn btn-secondary">Start</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

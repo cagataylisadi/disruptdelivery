@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DisruptDeliver</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.css"/>
+    <script src="/webjars/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+</head>
+<body>
+<div th:insert="~{navbar :: div}"></div>
+
+<div class="table-responsive container">
+    <h3>Offers:</h3>
+    <table id="offerTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>Offer Price</th>
+                <th>Expected Delivery Date</th>
+            </tr>
+            <tbody>
+                <tr th:each="offer: ${offers}">
+                    <td th:text="${offer.orderid}"></td>
+                    <td th:text="${offer.price_in_cents}"></td>
+                    <td th:text="${offer.expected_delivery_datetime}"></td>
+                </tr>
+            </tbody>
+        </thead>
+    </table>
+</div>
+<br>
+
+<div class="container mt-5">
+    <form th:action="@{/delivery}" th:object="${offer}" method="POST">
+    <div class="row">
+        <div class="col-sm-4">
+            <br>
+                <label>OrderId:</label>
+                <input class="form-control" type="text" id="orderid" th:field="*{orderid}">
+                <label>PriceInCents:</label>
+                <input class="form-control" type="text" id="price_in_cents" th:field="*{price_in_cents}">
+                <label>DeliveryDate:</label>
+                <input class="form-control" type="text" id="expected_delivery_datetime" th:field="*{expected_delivery_datetime}">
+                <br>
+                <button type="submit" class="btn btn-secondary">Select Offer</button>
+        </div>
+    </form>
+    </div>
+</div>
+
+</body>
+</html>
